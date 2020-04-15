@@ -15,7 +15,7 @@ public class SudokuBoardController {
     private final SudokuBoardMapper sudokuBoardMapper;
 
     @GetMapping(value = "/sudoku/{input}")
-    public SudokuBoardDto getSudokuBoard(@PathVariable String input) throws CloneNotSupportedException {
+    public SudokuBoardDto getSolvedSudokuBoard(@PathVariable String input) throws CloneNotSupportedException {
         return sudokuBoardMapper.mapToSuodkuBoardDto(sudokuBoardService.getSudokuBoard(input));
     }
 }
