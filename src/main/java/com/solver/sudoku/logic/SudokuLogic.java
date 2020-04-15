@@ -6,10 +6,11 @@ import com.solver.sudoku.domain.SudokuBoardCoordinates;
 import com.solver.sudoku.domain.SudokuElement;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class SudokuLogic {
-    private ArrayList<Backtrack> backtracks = new ArrayList<>();
+    private List<Backtrack> backtracks = new ArrayList<>();
 
     public void insertMissingValuesIntoSudokuBoard(SudokuBoard sudokuBoard) throws CloneNotSupportedException {
         while (isEmptyValueOnTheBoard(sudokuBoard)) {
@@ -93,8 +94,8 @@ public class SudokuLogic {
     }
 
     private void removeUsedValuesFromElementsCollectionRowSearch(SudokuBoard sudokuBoard, int row, int col) {
-        ArrayList<Integer> elementPossibleValues = getAllPossibleElementValues(sudokuBoard, row, col);
-        ArrayList<Integer> elementPossibleValuesWithoutUsedValues = new ArrayList<>(elementPossibleValues);
+        List<Integer> elementPossibleValues = getAllPossibleElementValues(sudokuBoard, row, col);
+        List<Integer> elementPossibleValuesWithoutUsedValues = new ArrayList<>(elementPossibleValues);
 
         for (Integer integer : elementPossibleValues) {
             sudokuBoard.getSudokuBoard()
@@ -112,8 +113,8 @@ public class SudokuLogic {
     }
 
     private void removeUsedValuesFromElementsCollectionColumnSearch(SudokuBoard sudokuBoard, int row, int col) {
-        ArrayList<Integer> elementPossibleValues = getAllPossibleElementValues(sudokuBoard, row, col);
-        ArrayList<Integer> elementPossibleValuesWithoutUsedValues = new ArrayList<>(elementPossibleValues);
+        List<Integer> elementPossibleValues = getAllPossibleElementValues(sudokuBoard, row, col);
+        List<Integer> elementPossibleValuesWithoutUsedValues = new ArrayList<>(elementPossibleValues);
 
         for (Integer integer : elementPossibleValues) {
             sudokuBoard.getSudokuBoard()
@@ -132,8 +133,8 @@ public class SudokuLogic {
     }
 
     private void removeUsedValuesFromElementsCollectionSectionSearch(SudokuBoard sudokuBoard, int row, int col) {
-        ArrayList<Integer> elementPossibleValues = getAllPossibleElementValues(sudokuBoard, row, col);
-        ArrayList<Integer> elementPossibleValuesWithoutUsedValues = new ArrayList<>(elementPossibleValues);
+        List<Integer> elementPossibleValues = getAllPossibleElementValues(sudokuBoard, row, col);
+        List<Integer> elementPossibleValuesWithoutUsedValues = new ArrayList<>(elementPossibleValues);
 
         int r = row - row % 3;
         int c = col - col % 3;
@@ -224,8 +225,8 @@ public class SudokuLogic {
     }
 
     private void setPossibleValueIfIsNoSetValueOrPossibleValueInOtherElementsInRowSearch(SudokuBoard sudokuBoard, int row, int col) {
-        ArrayList<Integer> elementPossibleValues = getAllPossibleElementValues(sudokuBoard, row, col);
-        ArrayList<Integer> allRowElementsPossibleValues = getAllRowOrColumnElementValueAndPossibleValuesWithoutCurrentElement(sudokuBoard, row, col);
+        List<Integer> elementPossibleValues = getAllPossibleElementValues(sudokuBoard, row, col);
+        List<Integer> allRowElementsPossibleValues = getAllRowOrColumnElementValueAndPossibleValuesWithoutCurrentElement(sudokuBoard, row, col);
 
         for (Integer integer : elementPossibleValues) {
             if (!allRowElementsPossibleValues.contains(integer)) {
@@ -263,16 +264,16 @@ public class SudokuLogic {
                 .getValue());
     }
 
-    private ArrayList<Integer> getAllPossibleElementValues(SudokuBoard sudokuBoard, int row, int col) {
+    private List<Integer> getAllPossibleElementValues(SudokuBoard sudokuBoard, int row, int col) {
         return sudokuBoard
                 .getSudokuBoardElement(row, col)
                 .getListOfAllPossibleElementValues();
     }
 
     private void setPossibleValueIfIsNoSetValueOrPossibleValueInOtherElementsInColumnSearch(SudokuBoard sudokuBoard, int row, int col) {
-        ArrayList<Integer> elementPossibleValues = getAllPossibleElementValues(sudokuBoard, row, col);
+        List<Integer> elementPossibleValues = getAllPossibleElementValues(sudokuBoard, row, col);
 
-        ArrayList<Integer> allColumnElementsPossibleValues = getAllRowOrColumnElementValueAndPossibleValuesWithoutCurrentElement(sudokuBoard, row, col);
+        List<Integer> allColumnElementsPossibleValues = getAllRowOrColumnElementValueAndPossibleValuesWithoutCurrentElement(sudokuBoard, row, col);
 
         for (Integer integer : elementPossibleValues) {
             if (!allColumnElementsPossibleValues.contains(integer)) {
@@ -285,9 +286,9 @@ public class SudokuLogic {
     }
 
     private void setPossibleValueIfIsNoSetValueOrPossibleValueInOtherElementsInColumnSearchInSectionSearch(SudokuBoard sudokuBoard, int row, int col) {
-        ArrayList<Integer> elementPossibleValue = getAllPossibleElementValues(sudokuBoard, row, col);
+        List<Integer> elementPossibleValue = getAllPossibleElementValues(sudokuBoard, row, col);
 
-        ArrayList<Integer> allSectionElementsPossibleValues = new ArrayList<>();
+        List<Integer> allSectionElementsPossibleValues = new ArrayList<>();
 
         int r = row - (row % 3);
         int c = col - (col % 3);

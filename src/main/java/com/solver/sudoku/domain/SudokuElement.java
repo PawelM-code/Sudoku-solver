@@ -1,11 +1,12 @@
 package com.solver.sudoku.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SudokuElement {
     public static int EMPTY = -1;
     private int value;
-    private ArrayList<Integer> listOfAllPossibleElementValues;
+    private List<Integer> listOfAllPossibleElementValues;
 
     SudokuElement(int value, ArrayList<Integer> listOfAllPosibleSudokuValues) {
         this.value = value;
@@ -20,11 +21,11 @@ public class SudokuElement {
         this.value = value;
     }
 
-    public ArrayList<Integer> getListOfAllPossibleElementValues() {
+    public List<Integer> getListOfAllPossibleElementValues() {
         return listOfAllPossibleElementValues;
     }
 
-    public void setListOfAllPossibleElementValues(ArrayList<Integer> listOfAllPossibleElementValues) {
+    public void setListOfAllPossibleElementValues(List<Integer> listOfAllPossibleElementValues) {
         this.listOfAllPossibleElementValues = listOfAllPossibleElementValues;
     }
 }

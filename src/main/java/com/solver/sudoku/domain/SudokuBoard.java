@@ -4,14 +4,15 @@ import com.solver.sudoku.prototype.Prototype;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class SudokuBoard extends Prototype {
-    private ArrayList<SudokuRow> sudokuBoard = new ArrayList<>();
+    private List<SudokuRow> sudokuBoard = new ArrayList<>();
 
     public SudokuBoard() {
     }
 
-    public void setSudokuBoard(ArrayList<SudokuRow> sudokuBoard) {
+    public void setSudokuBoard(List<SudokuRow> sudokuBoard) {
         this.sudokuBoard = sudokuBoard;
     }
 
@@ -41,7 +42,7 @@ public class SudokuBoard extends Prototype {
         return clonedSudokuBoard;
     }
 
-    public ArrayList<SudokuRow> getSudokuBoard() {
+    public List<SudokuRow> getSudokuBoard() {
         return sudokuBoard;
     }
 
