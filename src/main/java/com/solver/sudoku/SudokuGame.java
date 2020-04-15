@@ -1,5 +1,8 @@
 package com.solver.sudoku;
 
+import com.solver.sudoku.domain.SudokuBoard;
+import com.solver.sudoku.logic.SudokuLogic;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -17,7 +20,7 @@ public class SudokuGame {
         while (!gameFinished) {
             SudokuGame theGame = new SudokuGame();
 
-            System.out.println("Entry value: [row][col][value] \nFinish entring: [STOP]");
+            System.out.println("Entry value: [row][col][value] \nFinish entering: [STOP]");
 
             boolean initValuesFinished = false;
             while (!initValuesFinished) {

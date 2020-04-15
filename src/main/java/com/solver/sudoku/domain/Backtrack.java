@@ -1,31 +1,31 @@
-package com.solver.sudoku;
+package com.solver.sudoku.domain;
 
-class Backtrack {
+public class Backtrack {
     private SudokuBoard sudokuBoard;
     private int row;
     private int col;
     private int guessedValue;
 
-    Backtrack(SudokuBoard sudokuBoard, int row, int col, int guessedValue) {
+    public Backtrack(SudokuBoard sudokuBoard, int row, int col, int guessedValue) {
         this.sudokuBoard = sudokuBoard;
         this.row = row;
         this.col = col;
         this.guessedValue = guessedValue;
     }
 
-    SudokuBoard getSudokuBoard() {
+    public SudokuBoard getSudokuBoard() {
         return sudokuBoard;
     }
 
-    int getRow() {
+    public int getRow() {
         return row;
     }
 
-    int getCol() {
+    public int getCol() {
         return col;
     }
 
-    int getGuessedValue() {
+    public int getGuessedValue() {
         return guessedValue;
     }
 }

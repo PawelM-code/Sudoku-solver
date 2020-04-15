@@ -1,4 +1,6 @@
-package com.solver.sudoku;
+package com.solver.sudoku.domain;
+
+import com.solver.sudoku.prototype.Prototype;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +11,7 @@ public class SudokuBoard extends Prototype {
     public SudokuBoard() {
     }
 
-    void setSudokuBoard(ArrayList<SudokuRow> sudokuBoard) {
+    public void setSudokuBoard(ArrayList<SudokuRow> sudokuBoard) {
         this.sudokuBoard = sudokuBoard;
     }
 
@@ -24,7 +26,7 @@ public class SudokuBoard extends Prototype {
         }
     }
 
-    SudokuBoard deepCopy() throws CloneNotSupportedException {
+    public SudokuBoard deepCopy() throws CloneNotSupportedException {
         SudokuBoard clonedSudokuBoard = (SudokuBoard) super.clone();
         clonedSudokuBoard.sudokuBoard = new ArrayList<>();
         for (SudokuRow sudokuRowList : sudokuBoard) {
@@ -39,7 +41,7 @@ public class SudokuBoard extends Prototype {
         return clonedSudokuBoard;
     }
 
-    ArrayList<SudokuRow> getSudokuBoard() {
+    public ArrayList<SudokuRow> getSudokuBoard() {
         return sudokuBoard;
     }
 
@@ -48,7 +50,7 @@ public class SudokuBoard extends Prototype {
         getSudokuBoardElement(row, col).getListOfAllPossibleElementValues().clear();
     }
 
-    SudokuElement getSudokuBoardElement(int row, int col){
+    public SudokuElement getSudokuBoardElement(int row, int col){
         return getSudokuBoard()
                 .get(row)
                 .getSudokuElements()

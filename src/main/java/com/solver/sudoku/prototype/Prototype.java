@@ -1,4 +1,4 @@
-package com.solver.sudoku;
+package com.solver.sudoku.prototype;
 
 public class Prototype<T> implements Cloneable {
     @Override

@@ -1,4 +1,6 @@
-package com.solver.sudoku;
+package com.solver.sudoku.domain;
+
+import com.solver.sudoku.domain.SudokuElement;
 
 import java.util.ArrayList;
 
@@ -9,7 +11,7 @@ public class SudokuRow {
         this.sudokuElements = sudokuElements;
     }
 
-    ArrayList<SudokuElement> getSudokuElements() {
+    public ArrayList<SudokuElement> getSudokuElements() {
         return sudokuElements;
     }
 

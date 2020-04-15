@@ -1,4 +1,9 @@
-package com.solver.sudoku;
+package com.solver.sudoku.logic;
+
+import com.solver.sudoku.domain.Backtrack;
+import com.solver.sudoku.domain.SudokuBoard;
+import com.solver.sudoku.domain.SudokuBoardCoordinates;
+import com.solver.sudoku.domain.SudokuElement;
 
 import java.util.ArrayList;
 import java.util.Random;

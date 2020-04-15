@@ -1,9 +1,9 @@
-package com.solver.sudoku;
+package com.solver.sudoku.domain;
 
 import java.util.ArrayList;
 
-class SudokuElement {
-    static int EMPTY = -1;
+public class SudokuElement {
+    public static int EMPTY = -1;
     private int value;
     private ArrayList<Integer> listOfAllPossibleElementValues;
 
@@ -12,7 +12,7 @@ class SudokuElement {
         this.listOfAllPossibleElementValues = listOfAllPosibleSudokuValues;
     }
 
-    int getValue() {
+    public int getValue() {
         return value;
     }
 
@@ -20,11 +20,11 @@ class SudokuElement {
         this.value = value;
     }
 
-    ArrayList<Integer> getListOfAllPossibleElementValues() {
+    public ArrayList<Integer> getListOfAllPossibleElementValues() {
         return listOfAllPossibleElementValues;
     }
 
-    void setListOfAllPossibleElementValues(ArrayList<Integer> listOfAllPossibleElementValues) {
+    public void setListOfAllPossibleElementValues(ArrayList<Integer> listOfAllPossibleElementValues) {
         this.listOfAllPossibleElementValues = listOfAllPossibleElementValues;
     }
 }

@@ -1,5 +1,7 @@
 package com.solver.sudoku;
 
+import com.solver.sudoku.domain.SudokuBoard;
+import com.solver.sudoku.logic.SudokuLogic;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
