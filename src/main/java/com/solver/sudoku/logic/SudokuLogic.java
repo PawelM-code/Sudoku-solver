@@ -16,60 +16,75 @@ public class SudokuLogic {
         while (isEmptyValueOnTheBoard(sudokuBoard)) {
             SudokuBoard startSudokuBoard = sudokuBoard.deepCopy();
 
-            for (int row = 0; row < 9; row++) {
-                for (int col = 0; col < 9; col++) {
-                    int elementValue = sudokuBoard.getValueOfSudokuElement(row, col);
+            removeUsedValuesFromBoardElements(sudokuBoard);
+            setConfirmedNewValueOnTheSuokuBoardElements(sudokuBoard);
+            setPossibleNewValueOnTheSudokuBoardElements(sudokuBoard);
+            checkExeptionsOnTheSudokuBoard(sudokuBoard);
+            backtrackHandling(sudokuBoard, startSudokuBoard);
+        }
+    }
 
-                    removeUsedValuesFromElementsCollection(sudokuBoard, row, col, elementValue);
+    private void backtrackHandling(SudokuBoard sudokuBoard, SudokuBoard startSudokuBoard) throws CloneNotSupportedException {
+        if (isNoProgress(sudokuBoard, startSudokuBoard)) {
+            addBacktrackToTheList(sudokuBoard);
+            setGuessedValue(sudokuBoard);
+        }
+    }
+
+    private void checkExeptionsOnTheSudokuBoard(SudokuBoard sudokuBoard) {
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                int elementValue = sudokuBoard.getValueOfSudokuElement(row, col);
+
+                if (isElementValueAndPossibleValuesEmpty(sudokuBoard, row, col, elementValue)) {
+                    exeptionHandling(sudokuBoard);
+                    break;
                 }
-            }
-
-            for (int row = 0; row < 9; row++) {
-                for (int col = 0; col < 9; col++) {
-                    if (isOnlyOneValueInListOfAllPossibleElementValues(sudokuBoard, row, col)) {
-                        int value = getFirstValueOfElementPossibleValues(sudokuBoard, row, col);
-                        setConfirmedNewValueOnTheSuokuBoard(sudokuBoard, row, col, value);
-                    }
+                if (isElementValueNotEmptyAndUsedInOtherElement(sudokuBoard, row, col, elementValue)) {
+                    exeptionHandling(sudokuBoard);
+                    break;
                 }
-            }
 
-            for (int row = 0; row < 9; row++) {
-                for (int col = 0; col < 9; col++) {
-                    int elementValue = sudokuBoard.getValueOfSudokuElement(row, col);
-                    if (elementValue == SudokuElement.EMPTY) {
-                        setPossibleValueIfIsNoSetValueOrPossibleValueInOtherElementsInRowSearch(sudokuBoard, row, col);
-                        setPossibleValueIfIsNoSetValueOrPossibleValueInOtherElementsInColumnSearch(sudokuBoard, row, col);
-                        setPossibleValueIfIsNoSetValueOrPossibleValueInOtherElementsInColumnSearchInSectionSearch(sudokuBoard, row, col);
-                    }
-                }
-            }
-
-            for (int row = 0; row < 9; row++) {
-                for (int col = 0; col < 9; col++) {
-                    int elementValue = sudokuBoard.getValueOfSudokuElement(row, col);
-
-                    if (isElementValueAndPossibleValuesEmpty(sudokuBoard, row, col, elementValue)) {
+                if (elementValue == SudokuElement.EMPTY && isOnlyOneValueInListOfAllPossibleElementValues(sudokuBoard, row, col)) {
+                    int value = getFirstValueOfElementPossibleValues(sudokuBoard, row, col);
+                    if (isValueUsedInOtherElements(sudokuBoard, row, col, value)) {
                         exeptionHandling(sudokuBoard);
                         break;
                     }
-                    if (isElementValueNotEmptyAndUsedInOtherElement(sudokuBoard, row, col, elementValue)) {
-                        exeptionHandling(sudokuBoard);
-                        break;
-                    }
-
-                    if (elementValue == SudokuElement.EMPTY && isOnlyOneValueInListOfAllPossibleElementValues(sudokuBoard, row, col)) {
-                        int value = getFirstValueOfElementPossibleValues(sudokuBoard, row, col);
-                        if (isValueUsedInOtherElements(sudokuBoard, row, col, value)) {
-                            exeptionHandling(sudokuBoard);
-                            break;
-                        }
-                    }
                 }
             }
+        }
+    }
 
-            if (isNoProgress(sudokuBoard, startSudokuBoard)) {
-                addBacktrackToTheList(sudokuBoard);
-                setGuessedValue(sudokuBoard);
+    private void setPossibleNewValueOnTheSudokuBoardElements(SudokuBoard sudokuBoard) {
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                int elementValue = sudokuBoard.getValueOfSudokuElement(row, col);
+                if (elementValue == SudokuElement.EMPTY) {
+                    setPossibleValueIfIsNoSetValueOrPossibleValueInOtherElementsInRowSearch(sudokuBoard, row, col);
+                    setPossibleValueIfIsNoSetValueOrPossibleValueInOtherElementsInColumnSearch(sudokuBoard, row, col);
+                    setPossibleValueIfIsNoSetValueOrPossibleValueInOtherElementsInColumnSearchInSectionSearch(sudokuBoard, row, col);
+                }
+            }
+        }
+    }
+
+    private void setConfirmedNewValueOnTheSuokuBoardElements(SudokuBoard sudokuBoard) {
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                if (isOnlyOneValueInListOfAllPossibleElementValues(sudokuBoard, row, col)) {
+                    int value = getFirstValueOfElementPossibleValues(sudokuBoard, row, col);
+                    setConfirmedNewValueOnTheSuokuElement(sudokuBoard, row, col, value);
+                }
+            }
+        }
+    }
+
+    private void removeUsedValuesFromBoardElements(SudokuBoard sudokuBoard) {
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                int elementValue = sudokuBoard.getValueOfSudokuElement(row, col);
+                removeUsedValuesFromElementsCollection(sudokuBoard, row, col, elementValue);
             }
         }
     }
@@ -162,7 +177,7 @@ public class SudokuLogic {
         return sudokuBoard.getSudokuBoardElement(row, col).getListOfAllPossibleElementValues().get(0);
     }
 
-    private void setConfirmedNewValueOnTheSuokuBoard(SudokuBoard sudokuBoard, int row, int col, int value) {
+    private void setConfirmedNewValueOnTheSuokuElement(SudokuBoard sudokuBoard, int row, int col, int value) {
         if (!isValueUsedInOtherElements(sudokuBoard, row, col, value)) {
             sudokuBoard.setValueInSudokuElement(row, col, value);
             sudokuBoard.getSudokuBoardElement(row, col).getListOfAllPossibleElementValues().clear();

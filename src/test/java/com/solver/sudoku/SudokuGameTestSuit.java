@@ -17,7 +17,6 @@ public class SudokuGameTestSuit {
         exit.expectSystemExitWithStatus(0);
 
         SudokuBoard sudokuBoard = new SudokuBoard();
-        sudokuBoard.initSudokuBoard();
 
         sudokuBoard.setValueInSudokuElement(0, 0, 2);
         sudokuBoard.setValueInSudokuElement(0, 1, 2);
@@ -32,7 +31,6 @@ public class SudokuGameTestSuit {
     public void testSudokuGameBoard() throws CloneNotSupportedException {
         //given
         SudokuBoard sudokuBoard = new SudokuBoard();
-        sudokuBoard.initSudokuBoard();
 
         sudokuBoard.setValueInSudokuElement(0, 0, 8);
 
@@ -67,7 +65,6 @@ public class SudokuGameTestSuit {
         SudokuLogic sudokuLogic = new SudokuLogic();
 
         SudokuBoard sudokuBoardResult = new SudokuBoard();
-        sudokuBoardResult.initSudokuBoard();
         sudokuBoardResult.setValueInSudokuElement(0, 0, 8);
         sudokuBoardResult.setValueInSudokuElement(0, 1, 1);
         sudokuBoardResult.setValueInSudokuElement(0, 2, 2);

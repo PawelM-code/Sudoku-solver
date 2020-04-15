@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class SudokuBoardService {
     public SudokuBoard getSudokuBoard(String input) throws CloneNotSupportedException {
         SudokuBoard sudokuBoard = new SudokuBoard();
-        sudokuBoard.initSudokuBoard();
+//        sudokuBoard.initSudokuBoard();
 
         if (input.length() % 3 == 0) {
             String[] boardElements = input.split("(?<=\\G.{" + 3 + "})");
