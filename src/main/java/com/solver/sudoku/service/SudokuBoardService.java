@@ -1,6 +1,7 @@
 package com.solver.sudoku.service;
 
 import com.solver.sudoku.domain.SudokuBoard;
+import com.solver.sudoku.exception.SudokuBoardException;
 import com.solver.sudoku.logic.SudokuLogic;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +10,8 @@ import java.util.Arrays;
 
 @Service
 public class SudokuBoardService {
-    public SudokuBoard getSudokuBoard(String input) throws CloneNotSupportedException {
+    public SudokuBoard getSudokuBoard(String input) throws CloneNotSupportedException, SudokuBoardException {
         SudokuBoard sudokuBoard = new SudokuBoard();
-//        sudokuBoard.initSudokuBoard();
 
         if (input.length() % 3 == 0) {
             String[] boardElements = input.split("(?<=\\G.{" + 3 + "})");

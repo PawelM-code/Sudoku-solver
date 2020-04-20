@@ -4,6 +4,7 @@ import com.solver.sudoku.domain.Backtrack;
 import com.solver.sudoku.domain.SudokuBoard;
 import com.solver.sudoku.domain.SudokuBoardCoordinates;
 import com.solver.sudoku.domain.SudokuElement;
+import com.solver.sudoku.exception.SudokuBoardException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.Random;
 public class SudokuLogic {
     private List<Backtrack> backtracks = new ArrayList<>();
 
-    public void insertMissingValuesIntoSudokuBoard(SudokuBoard sudokuBoard) throws CloneNotSupportedException {
+    public void insertMissingValuesIntoSudokuBoard(SudokuBoard sudokuBoard) throws CloneNotSupportedException, SudokuBoardException {
         while (isEmptyValueOnTheBoard(sudokuBoard)) {
             SudokuBoard startSudokuBoard = sudokuBoard.deepCopy();
 
@@ -31,7 +32,7 @@ public class SudokuLogic {
         }
     }
 
-    private void checkExeptionsOnTheSudokuBoard(SudokuBoard sudokuBoard) {
+    private void checkExeptionsOnTheSudokuBoard(SudokuBoard sudokuBoard) throws SudokuBoardException {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 int elementValue = sudokuBoard.getValueOfSudokuElement(row, col);
@@ -338,10 +339,13 @@ public class SudokuLogic {
         return elementValue != SudokuElement.EMPTY && isValueUsedInOtherElements(sudokuBoard, row, col, elementValue);
     }
 
-    private void exeptionHandling(SudokuBoard sudokuBoard) {
+    private void exeptionHandling(SudokuBoard sudokuBoard) throws SudokuBoardException {
         if (backtracks.size() == 0) {
             System.out.println("Incorrect Sudoku init values.");
-            System.exit(0);
+            System.gc();
+            sudokuBoard.initSudokuBoard();
+
+            throw new SudokuBoardException();
         } else {
             int numberOfNewestBacktrack = backtracks.size() - 1;
             int rowBacktrack = backtracks.get(numberOfNewestBacktrack).getRow();

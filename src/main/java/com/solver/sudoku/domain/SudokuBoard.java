@@ -13,7 +13,7 @@ public class SudokuBoard extends Prototype {
         initSudokuBoard();
     }
 
-    private void initSudokuBoard() {
+    public void initSudokuBoard() {
         for (int row = 0; row < 9; row++) {
             ArrayList<SudokuElement> initRowList = new ArrayList<>();
             SudokuRow sudokuRow = new SudokuRow(initRowList);

@@ -1,6 +1,7 @@
 package com.solver.sudoku;
 
 import com.solver.sudoku.domain.SudokuBoard;
+import com.solver.sudoku.exception.SudokuBoardException;
 import com.solver.sudoku.logic.SudokuLogic;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -11,24 +12,20 @@ public class SudokuGameTestSuit {
     @Rule
     public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
-    @Test
-    public void testSudokuBoardIncorrectInitValues() throws CloneNotSupportedException {
+    @Test(expected = SudokuBoardException.class)
+    public void testSudokuBoardIncorrectInitValues() throws CloneNotSupportedException, SudokuBoardException {
         //given
-        exit.expectSystemExitWithStatus(0);
-
         SudokuBoard sudokuBoard = new SudokuBoard();
-
         sudokuBoard.setValueInSudokuElement(0, 0, 2);
         sudokuBoard.setValueInSudokuElement(0, 1, 2);
 
         SudokuLogic sudokuLogic = new SudokuLogic();
-
-        //then
+        //when & then
         sudokuLogic.insertMissingValuesIntoSudokuBoard(sudokuBoard);
     }
 
     @Test
-    public void testSudokuGameBoard() throws CloneNotSupportedException {
+    public void testSudokuGameBoard() throws CloneNotSupportedException, SudokuBoardException {
         //given
         SudokuBoard sudokuBoard = new SudokuBoard();
 
