@@ -20,12 +20,14 @@ public class SudokuBoardService {
                 int col = Integer.valueOf(boardElement.substring(1, 2)) - 1;
                 int value = Integer.valueOf(boardElement.substring(2, 3));
                 ArrayList<Integer> allowedNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
-                if (allowedNumbers.contains(row + 1) && allowedNumbers.contains(col + 1) && allowedNumbers.contains(value)) {
+                if (allowedNumbers.contains(value)) {
                     sudokuBoard.setValueInSudokuElement(row, col, value);
                 } else {
-                    return null;
+                    throw new SudokuBoardException();
                 }
             }
+        } else {
+            throw new SudokuBoardException();
         }
         SudokuLogic sudokuLogic = new SudokuLogic();
         sudokuLogic.insertMissingValuesIntoSudokuBoard(sudokuBoard);
