@@ -341,7 +341,6 @@ public class SudokuLogic {
 
     private void exeptionHandling(SudokuBoard sudokuBoard) throws SudokuBoardException {
         if (backtracks.size() == 0) {
-            System.out.println("Incorrect Sudoku init values.");
             System.gc();
             sudokuBoard.initSudokuBoard();
 

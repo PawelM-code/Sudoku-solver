@@ -22,9 +22,7 @@ public class SudokuBoardService {
                 ArrayList<Integer> allowedNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
                 if (allowedNumbers.contains(row + 1) && allowedNumbers.contains(col + 1) && allowedNumbers.contains(value)) {
                     sudokuBoard.setValueInSudokuElement(row, col, value);
-                    System.out.println(sudokuBoard);
                 } else {
-                    System.out.println("Incorrect entry.");
                     return null;
                 }
             }
